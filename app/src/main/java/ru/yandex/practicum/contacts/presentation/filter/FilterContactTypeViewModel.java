@@ -1,8 +1,10 @@
 package ru.yandex.practicum.contacts.presentation.filter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -60,13 +62,24 @@ public class FilterContactTypeViewModel extends BaseBottomSheetViewModel {
     }
 
     private void updateFilterContactTypes() {
-        // создайте массив строк. Для инициализации используйте метод ContactType.getContactTypes(),
+        String[] types = ContactType.getContactTypes();
+
+        ArrayList<FilterContactTypeUi> filterContactTypesUi = new ArrayList<>();
+        filterContactTypesUi.add(createAllSelectedItem(types));
+
+        for (String type : types) {
+            filterContactTypesUi.add(createFilterContactType(type));
+        }
+
+        filterContactTypesLiveDate.setValue(filterContactTypesUi);
+
+    // создайте массив строк. Для инициализации используйте метод ContactType.getContactTypes(),
         // который должен возвращать список всех доступных источников контактов
 
         // создайте список типа FilterContactTypeUi и заполните его с помощью цикла forEach
         // forEach должен бежать по строковому массиву, который вы создали ранее
 
-        // вызовите меотод setValue() у переменной filterContactTypesLiveDate и передайте в качестве аргументы ваш список типа FilterContactTypeUi
+         //вызовите меотод setValue() у переменной filterContactTypesLiveDate и передайте в качестве аргументы ваш список типа FilterContactTypeUi
     }
 
     @NonNull
